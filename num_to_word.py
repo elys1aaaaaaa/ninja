@@ -1,13 +1,10 @@
 
-
 def num2word(number):
     ones_word = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"] 
 
     teens_words = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
 
     tens_word = ["ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
-
-    hundreds_word = ["one hundred", "two hundred", "three hundred", "four hundred", "five hundred", "six hundred", "seven hundred", "eight hundred", "nine hundred"]
     word = " "
 
 
@@ -45,9 +42,20 @@ def num3words(number):
     print (remainder)
     return word + " and " + num2word(remainder)
 
-        
+def num4words(number):
+    thousands_words = ["one thousand", "two thousand", "three thousand", "four thousand", "five thousand", "six thousand", "seven thousand", "eight thousand", "nine thousand"]
+    word = " "
 
+    if (number < 999):
+        return num3words(number)
+    if (number >=1000 and number <=9999):
+        d4 = number//1000
+        word = thousands_words[d4-1]
+    
+    remainder = number - (d4*1000)
+    print (remainder)
+    return word + " and " + num3words(remainder)
 
-a = 97
+a = 1197
 print (a)
-print(num3words(a))
+print(num4words(a))
