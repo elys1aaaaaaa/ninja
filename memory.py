@@ -23,7 +23,7 @@ for i in range(6):
 
 first_index = None
 lock = False
-matched = [False]
+matched = [False] * 6
 
 def handle_click(i):
     global first_index, lock
@@ -36,7 +36,7 @@ def handle_click(i):
     buttons[i].config(text=values[i])
 
     if first_index is None:
-        first_index = 1
+        first_index = i
     else:
         if values[i] == values[first_index]:
             matched[i] = True
