@@ -7,11 +7,16 @@ root.title("Snake - 1")
 game_over = False
 
 SIZE = 25
-W = 1000
-H = 1000
+W = 400
+H = 400
+
+max_x = W//SIZE
+max_y = H//SIZE
 
 canvas = tk.Canvas(root, width=W, height=H, bg="white")
 canvas.pack()
+status_label = tk.Label(root, text="Hello, Tkinter!", font=("Arial", 16, "bold"), bg="lightblue", fg="darkblue")
+status_label.pack(pady=20)
 
 snake = [(10,10)]
 
@@ -35,13 +40,10 @@ def draw():
                                 fill="green")
         
 def game_loop():
-    global game_over
+    global game_over, max_x, max_y
     if game_over:
         return
     global snake, food
-
-    max_x = W//SIZE
-    max_y = H//SIZE
 
     head_x, head_y = snake[0]
     new_head = (head_x + dx, head_y + dy)
@@ -53,7 +55,6 @@ def game_loop():
         print("hit right")
         new_head = (0 , head_y + dy)
     elif new_head[1] < 0:
-        print("hit top")
         new_head = (head_x + dx, max_y)
     elif new_head[1] >= max_y:
         print("hit bottom")
@@ -61,7 +62,7 @@ def game_loop():
 
     if new_head in snake:
         game_over = True
-        #status_label.config(text="Game Over")
+        status_label.config(text="Game Over")
         print("collision")
 
     snake.insert(0, new_head)
@@ -98,7 +99,7 @@ root.bind("<Left>", left)
 root.bind("<Right>", right)
 
 def restart():
-    global snake, dx, dy, food, game_over
+    global snake, dx, dy, food, game_over, max_x, max_y
     snake = [(10,10)]
     dx, dy = 1,0
     food = (random.randint(0, max_x - 1),
